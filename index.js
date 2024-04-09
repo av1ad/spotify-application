@@ -103,4 +103,8 @@ app.get("/refresh_token", (req, res) => {
     });
 });
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build/index.html")); // this is for heroku
+})
+
 app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
