@@ -3,11 +3,15 @@ const express = require("express");
 const querystring = require("querystring");
 const app = express();
 const axios = require("axios");
-const port = process.env.PORT || 8888; // process.env.PORT is for heroku
+const path = require("path");
 
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
+const FRONTEND_URI = process.env.FRONTEND_URI;
+const PORT = process.env.PORT || 8888; // process.env.PORT is for heroku
+
+app.use(express.static(path.join(__dirname, "./client/build"))); // this is for heroku
 
 app.get("/", (req, res) => {
   res.send("Meow!");
@@ -68,7 +72,7 @@ app.get("/callback", (req, res) => {
       });
 
       // redirect to react app
-      res.redirect(`http://localhost:3000/?${queryParams}`);
+      res.redirect(`${FRONTEND_URI}?${queryParams}`);
     } else {
       res.redirect(`/?${querystring.stringify({ error: "invalid_token" })}`);
     }
@@ -99,4 +103,4 @@ app.get("/refresh_token", (req, res) => {
     });
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}...`));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
