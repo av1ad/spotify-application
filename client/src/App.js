@@ -10,7 +10,7 @@ import {
 import styled from "styled-components";
 import "./App.css";
 import { GlobalStyle } from "./styles";
-import { Login, Profile, TopArtists, TopTracks } from "./pages";
+import { Login, Profile, TopArtists, TopTracks, Playlists } from "./pages";
 
 const StyledLogOutButton = styled.button`
   position: absolute;
@@ -58,7 +58,7 @@ function App() {
         <Route path="/top-artists" element={<TopArtists />} />
         <Route path="/top-tracks" element={<TopTracks />} />
         <Route path="/playlists/:id" element={<h1>Playlist</h1>} />
-        <Route path="/playlists" element={<h1>Playlists</h1>} />
+        <Route path="/playlists" element={<Playlists />} />
         <Route
           path="/"
           element={
