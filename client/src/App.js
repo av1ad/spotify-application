@@ -10,7 +10,14 @@ import {
 import styled from "styled-components";
 import "./App.css";
 import { GlobalStyle } from "./styles";
-import { Login, Profile, TopArtists, TopTracks, Playlists, Playlist } from "./pages";
+import {
+  Login,
+  Profile,
+  TopArtists,
+  TopTracks,
+  Playlists,
+  Playlist,
+} from "./pages";
 
 const StyledLogOutButton = styled.button`
   position: absolute;

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { catchErrors } from "../utils";
 import { getPlaylistById, getAudioFeaturesForTracks } from "../spotify";
-import { TrackList, SectionWrapper } from "../components";
+import { TrackList, SectionWrapper, Loader } from "../components";
 import { StyledHeader, StyledDropdown } from "../styles";
 
 const Playlist = () => {
@@ -37,14 +37,14 @@ const Playlist = () => {
     if (!tracksData) {
       return;
     }
-  
+
     const fetchMoreData = async () => {
       if (tracksData.next) {
         const { data } = await axios.get(tracksData.next);
         setTracksData(data);
       }
     };
-  
+
     // Update the tracks state by adding only the new tracks
     setTracks((tracks) => {
       const newTracks = tracksData.items.filter(
@@ -52,9 +52,9 @@ const Playlist = () => {
       );
       return [...(tracks || []), ...newTracks];
     });
-  
+
     catchErrors(fetchMoreData());
-  
+
     const fetchAudioFeatures = async () => {
       const ids = tracksData.items.map(({ track }) => track.id).join(",");
       const { data } = await getAudioFeaturesForTracks(ids);
@@ -63,7 +63,7 @@ const Playlist = () => {
         ...data["audio_features"],
       ]);
     };
-  
+
     catchErrors(fetchAudioFeatures());
   }, [tracksData]);
 
@@ -139,20 +139,19 @@ const Playlist = () => {
                 </p>
               </div>
             </div>
-            
           </StyledHeader>
-        
 
           <main>
-          
             <SectionWrapper title="Playlist" breadcrumb={true}>
-            <StyledDropdown active={!!sortValue}>
-                <label className="sr-only" htmlFor="order-select">Sort tracks</label>
+              <StyledDropdown active={!!sortValue}>
+                <label className="sr-only" htmlFor="order-select">
+                  Sort tracks
+                </label>
                 <select
                   name="track-order"
                   id="order-select"
-                  onChange={e => setSortValue(e.target.value)}
-                  >
+                  onChange={(e) => setSortValue(e.target.value)}
+                >
                   <option value="">Sort tracks</option>
                   {sortOptions.map((option, i) => (
                     <option value={option} key={i}>
@@ -161,7 +160,7 @@ const Playlist = () => {
                   ))}
                 </select>
               </StyledDropdown>
-              {sortedTracks && <TrackList tracks={sortedTracks} />}{" "}
+              {sortedTracks ? <TrackList tracks={sortedTracks} /> : <Loader />}{" "}
             </SectionWrapper>
           </main>
         </>
