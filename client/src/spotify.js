@@ -125,3 +125,11 @@ export const getTopArtists = (time_range = "short_term") => {
 export const getTopTracks = (time_range = "short_term") => {
     return axios.get(`/me/top/tracks?time_range=${time_range}`);
 }
+
+export const getPlaylistById = (playlistId) => {
+  return axios.get(`/playlists/${playlistId}`);
+}
+
+export const getAudioFeaturesForTracks = (ids) => {
+  return axios.get(`/audio-features?ids=${ids}`);
+}
