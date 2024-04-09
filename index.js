@@ -34,7 +34,7 @@ app.get("/login", (req, res) => {
     response_type: "code",
     redirect_uri: REDIRECT_URI,
     state: state,
-    scope: "user-read-private user-read-email",
+    scope: ["user-read-private", "user-read-email", "user-top-read"].join(' '),
     show_dialog: true,
   });
   res.redirect(`https://accounts.spotify.com/authorize?${queryParam}`);
@@ -64,6 +64,7 @@ app.get("/callback", (req, res) => {
       const queryParams = querystring.stringify({
         access_token,
         refresh_token,
+        expires_in,
       });
 
       // redirect to react app
