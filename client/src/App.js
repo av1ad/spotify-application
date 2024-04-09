@@ -10,14 +10,14 @@ import {
 import styled from "styled-components";
 import "./App.css";
 import { GlobalStyle } from "./styles";
-import { Login, Profile } from "./pages";
+import { Login, Profile, TopArtists, TopTracks } from "./pages";
 
 const StyledLogOutButton = styled.button`
   position: absolute;
   top: var(--spacing-sm);
   right: var(--spacing-md);
   padding: var(--spacing-xs) var(--spacing-sm);
-  background-color: rgba(0,0,0,.7);
+  background-color: rgba(0, 0, 0, 0.7);
   color: var(--white);
   font-size: var(--fz-sm);
   font-weight: 700;
@@ -55,8 +55,8 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/top-artists" element={<h1>Top Artists</h1>} />
-        <Route path="/top-tracks" element={<h1>Top Tracks</h1>} />
+        <Route path="/top-artists" element={<TopArtists />} />
+        <Route path="/top-tracks" element={<TopTracks />} />
         <Route path="/playlists/:id" element={<h1>Playlist</h1>} />
         <Route path="/playlists" element={<h1>Playlists</h1>} />
         <Route
@@ -64,7 +64,9 @@ function App() {
           element={
             token ? (
               <>
-                <StyledLogOutButton onClick={logout}>Log Out</StyledLogOutButton>
+                <StyledLogOutButton onClick={logout}>
+                  Log Out
+                </StyledLogOutButton>
                 <Profile profile={profile} />
               </>
             ) : (
