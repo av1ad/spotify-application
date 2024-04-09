@@ -103,7 +103,7 @@ export const logout = () => {
     window.localStorage.removeItem(LOCALSTORAGE_KEYS[property]);
   }
   // Navigate to homepage
-  window.location = "/login";
+  window.location = window.location.origin;
 };
 
 export const accessToken = getAccessToken();
