@@ -11,6 +11,16 @@ A React app that uses the Spotify API to display a user's top artists and tracks
 - [Node](https://nodejs.org/en/)
 - [Express](https://expressjs.com/)
 
+## Live Preview
+[Spotify Profile App](https://aviad-spotify-profile-24b1df1946bf.herokuapp.com/)
+
+## Preview
+![Spotify Profile App Profile](./client/public/og.png)
+![Spotify Profile App Artists](./readme-photos/artists.png)
+![Spotify Profile App Tracks](./readme-photos/tracks.png)
+![Spotify Profile App Playlists](./readme-photos/playlists.png)
+![Spotify Profile App Individual Playlist](./readme-photos/playlist.png)
+
 
 ## Local Installation & Set Up
 
