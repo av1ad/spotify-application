@@ -4,6 +4,14 @@ const querystring = require("querystring");
 const app = express();
 const axios = require("axios");
 const path = require("path");
+const cors = require("cors"); // this is for heroku
+
+app.use(cors()); // this is for heroku
+
+const allowedOrigin = 'https://aviad-spotify-profile-24b1df1946bf.herokuapp.com';
+app.use(cors({
+  origin: allowedOrigin
+}));
 
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
