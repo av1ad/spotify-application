@@ -24,8 +24,14 @@ const getAccessToken = () => {
   };
   const hasError = urlParams.get("error");
 
-  console.log("LOCALSTORAGE_VALUES.accessToken:", LOCALSTORAGE_VALUES.accessToken);
-  console.log("queryParams[LOCALSTORAGE_KEYS.accessToken]:", queryParams[LOCALSTORAGE_KEYS.accessToken]);
+  console.log(
+    "LOCALSTORAGE_VALUES.accessToken:",
+    LOCALSTORAGE_VALUES.accessToken
+  );
+  console.log(
+    "queryParams[LOCALSTORAGE_KEYS.accessToken]:",
+    queryParams[LOCALSTORAGE_KEYS.accessToken]
+  );
 
   // If there's an error OR the token in localStorage has expired, refresh the token
   if (
@@ -33,7 +39,9 @@ const getAccessToken = () => {
     hasTokenExpired() ||
     LOCALSTORAGE_VALUES.accessToken === "undefined"
   ) {
-    console.log("Access token has expired or there's an error. Refreshing token...");
+    console.log(
+      "Access token has expired or there's an error. Refreshing token..."
+    );
     refreshToken();
   }
 
@@ -42,6 +50,10 @@ const getAccessToken = () => {
     LOCALSTORAGE_VALUES.accessToken &&
     LOCALSTORAGE_VALUES.accessToken !== "undefined"
   ) {
+    console.log(
+      "Using access token from localStorage:",
+      LOCALSTORAGE_VALUES.accessToken
+    );
     return LOCALSTORAGE_VALUES.accessToken;
   }
 
@@ -53,15 +65,14 @@ const getAccessToken = () => {
     }
     // Set timestamp
     window.localStorage.setItem(LOCALSTORAGE_KEYS.timestamp, Date.now());
-    // Return access token from query params
+    console.log(
+      "Using access token from URL query params:",
+      queryParams[LOCALSTORAGE_KEYS.accessToken]
+    );
     return queryParams[LOCALSTORAGE_KEYS.accessToken];
   }
 
-  
-  console.log("Final access token:", queryParams[LOCALSTORAGE_KEYS.accessToken]);
-  return queryParams[LOCALSTORAGE_KEYS.accessToken];
-
-  // We should never get here!
+  console.error("No access token found.");
   return false;
 };
 
@@ -128,20 +139,20 @@ export const getCurrentUserProfile = async () => axios.get("/me");
 
 export const getCurrentUserPlaylists = (limit = 20) => {
   return axios.get(`/me/playlists?limit=${limit}`);
-}
+};
 
 export const getTopArtists = (time_range = "short_term") => {
-    return axios.get(`/me/top/artists?time_range=${time_range}`);
-}
+  return axios.get(`/me/top/artists?time_range=${time_range}`);
+};
 
 export const getTopTracks = (time_range = "short_term") => {
-    return axios.get(`/me/top/tracks?time_range=${time_range}`);
-}
+  return axios.get(`/me/top/tracks?time_range=${time_range}`);
+};
 
 export const getPlaylistById = (playlistId) => {
   return axios.get(`/playlists/${playlistId}`);
-}
+};
 
 export const getAudioFeaturesForTracks = (ids) => {
   return axios.get(`/audio-features?ids=${ids}`);
-}
+};
