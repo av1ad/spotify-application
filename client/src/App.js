@@ -58,7 +58,7 @@ function App() {
 
   return (
     <Router>
-      <GlobalStyle /> {/* Add the GlobalStyle component */}
+      <GlobalStyle /> {/** GlobalStyle is a component that we created in styles.js */}
       <ScrollToTop />
       <Routes>
         <Route path="/login" element={<Login />} />
