@@ -8,7 +8,7 @@ const cors = require("cors"); // this is for heroku
 
 app.use(cors()); // this is for heroku
 
-const allowedOrigin = 'https://aviad-spotify-profile-24b1df1946bf.herokuapp.com';
+const allowedOrigin = ['https://aviad-spotify-profile-24b1df1946bf.herokuapp.com','http://localhost:3000'];
 app.use(cors({
   origin: allowedOrigin
 }));
