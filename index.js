@@ -81,6 +81,9 @@ app.get("/callback", (req, res) => {
 
 app.get("/refresh_token", (req, res) => {
   const { refresh_token } = req.query;
+
+  console.log("Received refresh token:", refresh_token);
+
   axios({
     method: "post",
     url: "https://accounts.spotify.com/api/token",
@@ -96,9 +99,11 @@ app.get("/refresh_token", (req, res) => {
     },
   })
     .then((response) => {
+      console.log("Refresh token response:", response.data);
       res.send(response.data);
     })
     .catch((error) => {
+      console.error("Error refreshing token:", error);
       res.send(error);
     });
 });

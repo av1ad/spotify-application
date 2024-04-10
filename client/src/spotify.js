@@ -24,12 +24,16 @@ const getAccessToken = () => {
   };
   const hasError = urlParams.get("error");
 
+  console.log("LOCALSTORAGE_VALUES.accessToken:", LOCALSTORAGE_VALUES.accessToken);
+  console.log("queryParams[LOCALSTORAGE_KEYS.accessToken]:", queryParams[LOCALSTORAGE_KEYS.accessToken]);
+
   // If there's an error OR the token in localStorage has expired, refresh the token
   if (
     hasError ||
     hasTokenExpired() ||
     LOCALSTORAGE_VALUES.accessToken === "undefined"
   ) {
+    console.log("Access token has expired or there's an error. Refreshing token...");
     refreshToken();
   }
 
@@ -52,6 +56,10 @@ const getAccessToken = () => {
     // Return access token from query params
     return queryParams[LOCALSTORAGE_KEYS.accessToken];
   }
+
+  
+  console.log("Final access token:", queryParams[LOCALSTORAGE_KEYS.accessToken]);
+  return queryParams[LOCALSTORAGE_KEYS.accessToken];
 
   // We should never get here!
   return false;
@@ -78,10 +86,14 @@ const refreshToken = async () => {
       logout();
     }
 
+    console.log("Refresh token:", LOCALSTORAGE_VALUES.refreshToken);
+
     // Use `/refresh_token` endpoint from our Node app
     const { data } = await axios.get(
       `/refresh_token?refresh_token=${LOCALSTORAGE_VALUES.refreshToken}`
     );
+
+    console.log("Refresh token response:", data);
 
     // Update localStorage values
     window.localStorage.setItem(
@@ -93,7 +105,7 @@ const refreshToken = async () => {
     // Reload the page for localStorage updates to be reflected
     window.location.reload();
   } catch (e) {
-    console.error(e);
+    console.error("Error refreshing token:", e);
   }
 };
 
