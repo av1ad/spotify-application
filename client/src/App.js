@@ -49,16 +49,23 @@ function App() {
 
   useEffect(() => {
     setToken(accessToken);
+
     const fetchData = async () => {
-      const { data } = await getCurrentUserProfile();
-      setProfile(data);
+      try {
+        const { data } = await getCurrentUserProfile();
+        setProfile(data);
+      } catch (e) {
+        console.error("Error fetching user profile:", e);
+      }
     };
+
     catchErrors(fetchData());
   }, []);
 
   return (
     <Router>
-      <GlobalStyle /> {/** GlobalStyle is a component that we created in styles.js */}
+      <GlobalStyle />{" "}
+      {/** GlobalStyle is a component that we created in styles.js */}
       <ScrollToTop />
       <Routes>
         <Route path="/login" element={<Login />} />

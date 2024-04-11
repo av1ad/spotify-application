@@ -116,7 +116,7 @@ const refreshToken = async () => {
     // Reload the page for localStorage updates to be reflected
     window.location.reload();
   } catch (e) {
-    console.error("Error refreshing token:", e);
+    console.error("Error refreshing token:", e.response?.data);
   }
 };
 
@@ -135,7 +135,10 @@ axios.defaults.baseURL = "https://api.spotify.com/v1";
 axios.defaults.headers["Authorization"] = `Bearer ${accessToken}`;
 axios.defaults.headers["Content-Type"] = "application/json";
 
-export const getCurrentUserProfile = async () => axios.get("/me");
+export const getCurrentUserProfile = async () => {
+  console.log("Access token used for /me request:", accessToken);
+  return axios.get("/me");
+};
 
 export const getCurrentUserPlaylists = (limit = 20) => {
   return axios.get(`/me/playlists?limit=${limit}`);
