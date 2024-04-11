@@ -50,10 +50,6 @@ const getAccessToken = () => {
     LOCALSTORAGE_VALUES.accessToken &&
     LOCALSTORAGE_VALUES.accessToken !== "undefined"
   ) {
-    console.log(
-      "Using access token from localStorage:",
-      LOCALSTORAGE_VALUES.accessToken
-    );
     return LOCALSTORAGE_VALUES.accessToken;
   }
 
@@ -65,10 +61,6 @@ const getAccessToken = () => {
     }
     // Set timestamp
     window.localStorage.setItem(LOCALSTORAGE_KEYS.timestamp, Date.now());
-    console.log(
-      "Using access token from URL query params:",
-      queryParams[LOCALSTORAGE_KEYS.accessToken]
-    );
     return queryParams[LOCALSTORAGE_KEYS.accessToken];
   }
 
@@ -104,8 +96,6 @@ const refreshToken = async () => {
       `/refresh_token?refresh_token=${LOCALSTORAGE_VALUES.refreshToken}`
     );
 
-    console.log("Refresh token response:", data);
-
     // Update localStorage values
     window.localStorage.setItem(
       LOCALSTORAGE_KEYS.accessToken,
@@ -136,7 +126,6 @@ axios.defaults.headers["Authorization"] = `Bearer ${accessToken}`;
 axios.defaults.headers["Content-Type"] = "application/json";
 
 export const getCurrentUserProfile = async () => {
-  console.log("Access token used for /me request:", accessToken);
   return axios.get("/me");
 };
 
