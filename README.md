@@ -8,6 +8,7 @@ A React app that uses the Spotify API to display a user's top artists and tracks
 - JavaScript
 - [Styled-Components](https://styled-components.com/)
 - [React](https://reactjs.org/)
+- [React Router](https://reactrouter.com/)
 - [Node](https://nodejs.org/en/)
 - [Express](https://expressjs.com/)
 
