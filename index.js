@@ -105,11 +105,9 @@ app.get("/refresh_token", (req, res) => {
     },
   })
     .then((response) => {
-      console.log("Refresh token response:", response.data);
       res.send(response.data);
     })
     .catch((error) => {
-      console.error("Error refreshing token:", error);
       res.send(error);
     });
 });

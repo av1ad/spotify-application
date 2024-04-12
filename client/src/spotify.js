@@ -24,15 +24,6 @@ const getAccessToken = () => {
   };
   const hasError = urlParams.get("error");
 
-  console.log(
-    "LOCALSTORAGE_VALUES.accessToken:",
-    LOCALSTORAGE_VALUES.accessToken
-  );
-  console.log(
-    "queryParams[LOCALSTORAGE_KEYS.accessToken]:",
-    queryParams[LOCALSTORAGE_KEYS.accessToken]
-  );
-
   // If there's an error OR the token in localStorage has expired, refresh the token
   if (
     hasError ||
@@ -88,8 +79,6 @@ const refreshToken = async () => {
       console.error("No refresh token available");
       logout();
     }
-
-    console.log("Refresh token:", LOCALSTORAGE_VALUES.refreshToken);
 
     // Use `/refresh_token` endpoint from our Node app
     const { data } = await axios.get(
